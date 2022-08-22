@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light  fixed-top ">
+        <a class="navbar-brand" href="{%url 'home'%}">My Tech Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{%url 'about'%}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/Kushalpatel932">Github</a>
+            </li>
+           
+            <li class="nav-item">
+              <a class="nav-link" href="#">linkedin</a>
+            </li>
+          </ul>
+          <ul class="nav justify-content-end">
+            {% if 'user' in request.session %}
+            
+            
+            <li class="nav-item">
+              <a class="nav-link " href="{%url 'newpost'%}">New Post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'draft'%}">Drafts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'logout' %}">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Welcome:{{user}}</a>
+            </li>
+            {%else%}
+            <li class="nav-item">
+              <a class="nav-link " href="{%url 'login'%}">Login</a>
+            </li>
+            {%endif%}
+          </ul>
+        </div>
+      </nav>
+      <div class="jumbotron">
+      {%block content%}
+      {%endblock%}
+      </div> 
+</body>
+</html>

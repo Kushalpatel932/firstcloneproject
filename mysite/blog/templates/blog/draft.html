@@ -1,0 +1,27 @@
+{%extends 'base.html'%} 
+{%block content %}
+<!-- {%for i in da%}
+<h1>created id{{i.id}}</h1>h1>
+{%endfor%} -->
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">author</th>
+        <th scope="col">create_date</th>
+        <th scope="col">comment</th>
+        
+      </tr>
+    </thead>
+    <tbody>{%for i in da%}
+      <tr>
+        <th scope="row">{{i.id}}</th>
+        <td>{{i.author}}</td>
+        <td>{{i.create_date}}</td>
+        <td>{{i.text}}</td>
+        
+      </tr>
+      {%endfor%}
+      </tbody>
+  </table>
+{%endblock%}

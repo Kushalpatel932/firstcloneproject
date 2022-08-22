@@ -1,0 +1,12 @@
+{%extends 'base.html'%} 
+{%block content %}
+{%for i in publish%}
+<div class="centerstage container">
+<h1><a href="{% url 'postdetail' pk=i.pk %}">{{i.title}}</a></h1>
+<p>{{i.published_date}}</p>
+
+<a href="{% url 'add_comment_post' pk=i.pk %}">Comments</a>
+<hr>
+</div>
+{%endfor%}
+{%endblock%}

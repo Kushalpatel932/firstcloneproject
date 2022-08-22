@@ -1,0 +1,42 @@
+{%extends 'base.html'%} 
+{%block content %}
+<h1 class='posttitle loader'>{{a.title}}</h1>
+{%if a.published_date%}
+<div class="date postdate">
+    {{ a.published_date }}
+</div>
+{%else%}
+
+<a class="btn btn-outline-dark" href="{%url 'post_publish' pk=a.pk %}">Publish</a>
+
+{%endif%}
+
+<p class='postcontent' >{{ a.text|safe|linebreaksbr }}</p>
+{% if 'user' in request.session %}
+    <a class="btn btn-primary" href="{%url 'post_edit' pk=a.pk %}">U<span class="fa fa-pencil"></span></a>
+    <a class="btn btn-primary" href="{%url 'post_remove' pk=a.pk %} ">D<span class="fa fa-remove"></span></a>
+{% endif %}
+ <hr>
+ <a class="btn btn-primary btn-comment" href="{%url 'add_comment_post' pk=a.pk%} ">Add comment</a>
+ <div class="container">
+
+
+    {% for comment in a.comments.all %}
+    <br>
+        {% if 'user' in requesrt.session or comment.approved_comment %}
+  
+                {{ comment.created_date }}
+                {% if not comment.approved_comment %}
+                    <a class="btn btn-primary" href="{% url 'comment_remove' pk=comment.pk %}"><span class="fa fa-remove">remove</span></a>
+                    <a class="btn btn-primary" href="{% url 'comment_approve' pk=comment.pk %}"><span class="fa fa-check">approve</span></a>
+                {% endif %}
+  
+            <p>{{ comment.text|safe|linebreaks }}</p>
+            <p>Posted by: <strong>{{ comment.author }}</strong></p>
+  
+        {% endif %}
+    {% empty %}
+        <p>No comments posted.</p>
+    {% endfor %}
+  </div> 
+{%endblock%}
